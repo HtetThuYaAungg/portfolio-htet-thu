@@ -2,7 +2,7 @@
   font-family: 'Share Tech Mono', monospace;
   line-height: 1.5;
   font-weight: 400;
-  color: #00ffff;
+  color: var(--primary-cyan, #00ffff);
   background-color: #0a0e14;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -18,10 +18,10 @@ html, body, #root {
 
 a {
   font-weight: 500;
-  color: #00ffff;
+  color: var(--primary-cyan, #00ffff);
   text-decoration: inherit;
 }
 
 a:hover {
-  color: #00ff88;
+  color: var(--primary-green, #00ff88);
 }

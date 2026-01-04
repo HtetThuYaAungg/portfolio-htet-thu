@@ -35,7 +35,7 @@
   font-size: 1.5rem;
   letter-spacing: 4px;
   color: var(--primary-cyan);
-  text-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+  text-shadow: 0 0 20px var(--border-glow);
 }
 
 .section-line {
@@ -53,7 +53,8 @@
 .about-text {
   font-size: 0.95rem;
   line-height: 1.8;
-  color: rgba(0, 255, 255, 0.85);
+  color: var(--primary-cyan);
+  opacity: 0.9;
 }
 
 .cursor-blink {
@@ -69,7 +70,7 @@
 .highlight {
   color: var(--primary-green);
   font-weight: 500;
-  text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+  text-shadow: 0 0 10px var(--border-glow);
 }
 
 .skills-grid {

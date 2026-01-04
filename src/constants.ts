@@ -27,7 +27,7 @@ export const USER_INFO = {
   username: 'htet_thu',
   displayName: 'Htet Thu',
   status: 'active',
-  host: 'portfolio-v1.0.4',
+  host: 'portfolio-',
   linkedin: 'https://www.linkedin.com/in/htet-thu-ya-a411471b5/',
 } as const
 
@@ -36,10 +36,10 @@ export const USER_INFO = {
 // ===========================================
 
 export const CONTACT_INFO: ContactItem[] = [
-  { label: 'User', value: 'htet_thu', icon: '👤', href: USER_INFO.linkedin },
-  { label: '/Email', value: 'htetthuya.htya@gmail.com', icon: '📧', href: 'https://mail.google.com/mail/?view=cm&to=htetthuya.htya@gmail.com' },
-  { label: 'GitHub', value: '/github.com/htethu', icon: '💻', href: 'https://github.com/HtetThuYaAungg' },
-  { label: 'LinkedIn', value: '/linkedin.com/in/htethu', icon: '🔗', href: USER_INFO.linkedin },
+  { label: 'User', value: 'htet_thu', icon: '⟩', href: USER_INFO.linkedin },
+  { label: '/Email', value: 'htetthuya.htya@gmail.com', icon: '@', href: 'https://mail.google.com/mail/?view=cm&to=htetthuya.htya@gmail.com' },
+  { label: 'GitHub', value: '/github.com/htethu', icon: '◈', href: 'https://github.com/HtetThuYaAungg' },
+  { label: 'LinkedIn', value: '/linkedin.com/in/htethu', icon: '◉', href: USER_INFO.linkedin },
 ]
 
 // ===========================================
@@ -146,3 +146,4 @@ export const TIMING = {
 
 export const SERVER_RACK_UNITS = 4
 
+export const INACTIVITY_DELAY = 10000 // 5 seconds

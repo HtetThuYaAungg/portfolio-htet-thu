@@ -88,7 +88,7 @@
   align-items: center;
   margin-top: 0.75rem;
   padding-top: 0.75rem;
-  border-top: 1px solid rgba(0, 255, 255, 0.1);
+  border-top: 1px solid var(--border-glow);
 }
 
 .time-display {
@@ -102,7 +102,7 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  background: rgba(0, 255, 255, 0.1);
+  background: var(--border-glow);
   padding: 0.4rem 1rem;
   border: 1px solid var(--primary-cyan);
   border-radius: 4px;
@@ -111,8 +111,8 @@
 }
 
 .user-badge:hover {
-  background: rgba(0, 255, 255, 0.2);
-  box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+  background: var(--text-dim);
+  box-shadow: 0 0 15px var(--border-glow);
 }
 
 .badge-icon {

@@ -84,7 +84,8 @@
 }
 
 .terminal-line.comment {
-  color: rgba(0, 255, 255, 0.4);
+  color: var(--text-dim);
+  opacity: 0.7;
   font-style: italic;
 }
 
@@ -93,7 +94,8 @@
 }
 
 .terminal-line.output {
-  color: rgba(0, 255, 136, 0.8);
+  color: var(--primary-green);
+  opacity: 0.9;
   padding-left: 0.5rem;
 }
 
@@ -110,7 +112,8 @@
 }
 
 .terminal-line.divider {
-  color: rgba(0, 255, 255, 0.2);
+  color: var(--primary-cyan);
+  opacity: 0.3;
   font-size: 0.7rem;
 }
 

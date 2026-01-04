@@ -449,3 +449,66 @@ body {
   background: var(--primary-cyan);
   color: var(--dark-bg);
 }
+
+/* Rainbow Theme Animation */
+@keyframes rainbowCycle {
+  0% { 
+    --primary-cyan: #ff0000;
+    --primary-green: #ff8800;
+  }
+  14% { 
+    --primary-cyan: #ff8800;
+    --primary-green: #ffff00;
+  }
+  28% { 
+    --primary-cyan: #ffff00;
+    --primary-green: #00ff00;
+  }
+  42% { 
+    --primary-cyan: #00ff00;
+    --primary-green: #00ffff;
+  }
+  57% { 
+    --primary-cyan: #00ffff;
+    --primary-green: #0088ff;
+  }
+  71% { 
+    --primary-cyan: #0088ff;
+    --primary-green: #8800ff;
+  }
+  85% { 
+    --primary-cyan: #8800ff;
+    --primary-green: #ff00ff;
+  }
+  100% { 
+    --primary-cyan: #ff0000;
+    --primary-green: #ff8800;
+  }
+}
+
+.rainbow-theme {
+  animation: rainbowCycle 8s linear infinite;
+}
+
+.rainbow-theme .glow-bar {
+  background: linear-gradient(90deg, 
+    transparent 0%,
+    #ff0000 10%,
+    #ff8800 20%,
+    #ffff00 30%,
+    #00ff00 40%,
+    #00ffff 50%,
+    #0088ff 60%,
+    #8800ff 70%,
+    #ff00ff 80%,
+    #ff0000 90%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: rainbowGlow 3s linear infinite;
+}
+
+@keyframes rainbowGlow {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}

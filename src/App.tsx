@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useMemo, useCallback, useRef } from 'react'
 import './App.css'
 import MatrixRain from './components/MatrixRain'
 import Header from './components/Header'
@@ -10,11 +10,38 @@ import {
   FOOTER_MESSAGE,
   SERVER_RACK_UNITS,
   TIMING,
+  INACTIVITY_DELAY,
 } from './constants'
+import { getRandomTheme, applyTheme, ColorTheme, RAINBOW_THEME } from './themes'
+
 
 function App() {
   const [loaded, setLoaded] = useState<boolean>(false)
   const [bootSequence, setBootSequence] = useState<boolean>(true)
+  const [isInactive, setIsInactive] = useState<boolean>(false)
+  
+  const baseTheme: ColorTheme = useMemo(() => getRandomTheme(), [])
+    const currentTheme = isInactive ? RAINBOW_THEME : baseTheme
+  
+  const inactivityTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  const handleUserActivity = useCallback(() => {
+    if (isInactive) {
+      setIsInactive(false)
+    }
+    
+    if (inactivityTimer.current) {
+      clearTimeout(inactivityTimer.current)
+    }
+    
+    inactivityTimer.current = setTimeout(() => {
+      setIsInactive(true)
+    }, INACTIVITY_DELAY)
+  }, [isInactive])
+
+  useEffect(() => {
+    applyTheme(currentTheme)
+  }, [currentTheme])
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -24,9 +51,29 @@ function App() {
     return () => clearTimeout(timer)
   }, [])
 
+  useEffect(() => {
+    const events = ['mousemove', 'mousedown', 'keydown', 'touchstart', 'scroll', 'click']
+        inactivityTimer.current = setTimeout(() => {
+      setIsInactive(true)
+    }, INACTIVITY_DELAY)
+    
+    events.forEach(event => {
+      window.addEventListener(event, handleUserActivity)
+    })
+    
+    return () => {
+      events.forEach(event => {
+        window.removeEventListener(event, handleUserActivity)
+      })
+      if (inactivityTimer.current) {
+        clearTimeout(inactivityTimer.current)
+      }
+    }
+  }, [handleUserActivity])
+
   return (
     <div className="app">
-      <MatrixRain />
+      <MatrixRain theme={currentTheme} />
       
       {bootSequence && (
         <div className="boot-screen">
