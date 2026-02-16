@@ -3,9 +3,11 @@ import './App.css'
 import MatrixRain from './components/MatrixRain'
 import Header from './components/Header'
 import About from './components/About'
+import CareerProjectDetails from './components/CareerProjectDetails'
 import Terminal from './components/Terminal'
 import {
   CONTACT_INFO,
+  EDUCATION,
   BOOT_MESSAGES,
   FOOTER_MESSAGE,
   SERVER_RACK_UNITS,
@@ -19,11 +21,24 @@ function App() {
   const [loaded, setLoaded] = useState<boolean>(false)
   const [bootSequence, setBootSequence] = useState<boolean>(true)
   const [isInactive, setIsInactive] = useState<boolean>(false)
+  const [selectedCareerId, setSelectedCareerId] = useState<string | null>(null)
   
   const baseTheme: ColorTheme = useMemo(() => getRandomTheme(), [])
     const currentTheme = isInactive ? RAINBOW_THEME : baseTheme
   
   const inactivityTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const centerPanelRef = useRef<HTMLDivElement>(null)
+  const leftPanelRef = useRef<HTMLDivElement>(null)
+
+  const handleBackFromDetails = useCallback(() => {
+    setSelectedCareerId(null)
+    const isMobile = window.matchMedia('(max-width: 768px)').matches
+    if (isMobile) {
+      requestAnimationFrame(() => {
+        leftPanelRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      })
+    }
+  }, [])
 
   const handleUserActivity = useCallback(() => {
     if (isInactive) {
@@ -42,6 +57,14 @@ function App() {
   useEffect(() => {
     applyTheme(currentTheme)
   }, [currentTheme])
+
+  useEffect(() => {
+    if (!selectedCareerId || !centerPanelRef.current) return
+    const isMobile = window.matchMedia('(max-width: 768px)').matches
+    if (isMobile) {
+      centerPanelRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+  }, [selectedCareerId])
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -90,15 +113,35 @@ function App() {
         <Header />
         
         <div className="content-wrapper">
-          <div className="left-panel">
-            <Terminal />
+          <div className="left-panel" ref={leftPanelRef}>
+            <Terminal
+              onSelectCareer={(id) => setSelectedCareerId(id)}
+              selectedCareerId={selectedCareerId}
+            />
           </div>
           
-          <div className="center-panel">
-            <About />
+          <div className="center-panel" ref={centerPanelRef}>
+            {selectedCareerId ? (
+              <CareerProjectDetails
+                careerId={selectedCareerId}
+                onBack={handleBackFromDetails}
+              />
+            ) : (
+              <About />
+            )}
           </div>
           
           <div className="right-panel">
+            <div className="education-panel">
+              <div className="info-header">EDUCATION</div>
+              {EDUCATION.map((item, index) => (
+                <div key={index} className="education-item">
+                  <span className="education-date">[{item.dateRange}]</span>
+                  <span className="education-school">{item.school}</span>
+                  <span className="education-degree">{item.degree}</span>
+                </div>
+              ))}
+            </div>
             <div className="contact-info-panel">
               <div className="info-header">CONTACT_INFO</div>
               {CONTACT_INFO.map((item, index) => (
@@ -115,7 +158,7 @@ function App() {
                 </div>
               ))}
             </div>
-            <div className="server-visual">
+            {/* <div className="server-visual">
               <div className="server-rack">
                 {[...Array(SERVER_RACK_UNITS)].map((_, i) => (
                   <div key={i} className="server-unit">
@@ -127,7 +170,7 @@ function App() {
                   </div>
                 ))}
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
 

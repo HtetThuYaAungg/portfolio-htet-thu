@@ -70,6 +70,7 @@
   opacity: 0;
   animation: fadeIn 0.3s ease forwards;
   flex-shrink: 0;
+  width: 100%;
 }
 
 @keyframes fadeIn {
@@ -115,6 +116,40 @@
   color: var(--primary-cyan);
   opacity: 0.3;
   font-size: 0.7rem;
+}
+
+.terminal-career-block {
+  opacity: 0;
+  transform: translateY(5px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.terminal-career-block.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.terminal-details-btn {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--primary-green);
+  background: transparent;
+  border: 1px solid var(--primary-green);
+  padding: 0.2rem 0.5rem;
+  margin: 0.25rem 0 0.25rem 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.terminal-details-btn:hover {
+  background: rgba(0, 255, 136, 0.15);
+  box-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
+}
+
+.terminal-details-btn.active {
+  background: rgba(0, 255, 136, 0.2);
+  border-color: var(--primary-green);
+  box-shadow: 0 0 12px rgba(0, 255, 136, 0.4);
 }
 
 .terminal-cursor {

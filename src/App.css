@@ -156,13 +156,13 @@ body {
   background: var(--panel-bg);
   border: 1px solid var(--border-glow);
   padding: 1rem;
-  flex: 1;
 }
 
 .server-rack {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  
 }
 
 .server-unit {
@@ -262,6 +262,53 @@ body {
 @keyframes scroll {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
+}
+
+/* Education Panel */
+.education-panel {
+  background: var(--panel-bg);
+  border: 1px solid var(--border-glow);
+  padding: 1rem;
+  position: relative;
+}
+
+.education-panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--primary-cyan), transparent);
+}
+
+.education-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid rgba(0, 255, 255, 0.1);
+}
+
+.education-item:last-child {
+  border-bottom: none;
+}
+
+.education-date {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  letter-spacing: 1px;
+}
+
+.education-school {
+  font-size: 0.9rem;
+  color: var(--primary-cyan);
+  font-weight: 500;
+}
+
+.education-degree {
+  font-size: 0.8rem;
+  color: var(--primary-green);
 }
 
 /* Contact Info Panel */

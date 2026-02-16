@@ -1,21 +1,29 @@
 import { useState, useEffect } from 'react'
 import './Terminal.css'
-import { TERMINAL_LINES, TIMING, type TerminalLine } from '../constants'
+import { CAREER_ENTRIES, TIMING, type CareerEntry } from '../constants'
 
-const Terminal: React.FC = () => {
-  const [visibleLines, setVisibleLines] = useState<TerminalLine[]>([])
+interface TerminalProps {
+  onSelectCareer: (careerId: string) => void
+  selectedCareerId: string | null
+}
+
+const Terminal: React.FC<TerminalProps> = ({ onSelectCareer, selectedCareerId }) => {
+  const [introDone, setIntroDone] = useState(false)
+  const [visibleCareerIndex, setVisibleCareerIndex] = useState(-1)
 
   useEffect(() => {
-    const showLines = async () => {
-      for (let i = 0; i < TERMINAL_LINES.length; i++) {
-        await new Promise(resolve => setTimeout(resolve, TIMING.terminalLineDelay))
-        setVisibleLines(prev => [...prev, TERMINAL_LINES[i]])
-      }
-    }
-    
-    const timer = setTimeout(showLines, TIMING.terminalStartDelay)
-    return () => clearTimeout(timer)
+    const t = setTimeout(() => setIntroDone(true), TIMING.terminalStartDelay)
+    return () => clearTimeout(t)
   }, [])
+
+  useEffect(() => {
+    if (!introDone) return
+    const showNext = () => {
+      setVisibleCareerIndex((i) => (i < CAREER_ENTRIES.length - 1 ? i + 1 : i))
+    }
+    const interval = setInterval(showNext, TIMING.terminalLineDelay)
+    return () => clearInterval(interval)
+  }, [introDone])
 
   return (
     <div className="terminal">
@@ -28,21 +36,40 @@ const Terminal: React.FC = () => {
         <span className="terminal-title">SYSTEM_LOG</span>
       </div>
       <div className="terminal-body">
-        {visibleLines.map((line, index) => (
-          <div 
-            key={index} 
-            className={`terminal-line ${line.type}`}
+        <div className="terminal-line comment">// Career History v1.0</div>
+        <div className="terminal-line command">$ cat history.log</div>
+        <div className="terminal-line divider">────────────────────</div>
+
+        {CAREER_ENTRIES.map((career: CareerEntry, index: number) => (
+          <div
+            key={career.id}
+            className={`terminal-career-block ${
+              index <= visibleCareerIndex ? "visible" : ""
+            }`}
             style={{ animationDelay: `${index * 0.1}s` }}
           >
-            {line.text}
+            <div className="terminal-line date">[{career.dateRange}]</div>
+            <div className="terminal-line output">&gt; {career.role}</div>
+            <div className="terminal-line output"> @ {career.company}</div>
+            <button
+              type="button"
+              className={`terminal-details-btn ${selectedCareerId === career.id ? 'active' : ''}`}
+              onClick={() => onSelectCareer(career.id)}
+            >
+              [details]
+            </button>
+              <div className="terminal-line divider">────────────────────</div>
           </div>
         ))}
+
+        <div className="terminal-line command">$ echo $STATUS</div>
+        <div className="terminal-line success">OPEN TO WORK</div>
         <div className="terminal-cursor">
           <span className="cursor-symbol">▌</span>
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 export default Terminal

@@ -1,0 +1,104 @@
+.career-details .details-back {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+  color: var(--primary-green);
+  background: transparent;
+  border: 1px solid var(--border-glow);
+  padding: 0.35rem 0.6rem;
+  cursor: pointer;
+  margin-right: 1rem;
+  transition: all 0.25s ease;
+}
+
+.career-details .details-back:hover {
+  background: rgba(0, 255, 136, 0.1);
+  border-color: var(--primary-green);
+  box-shadow: 0 0 12px rgba(0, 255, 136, 0.2);
+}
+
+.career-meta {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(0, 255, 255, 0.1);
+}
+
+.career-meta .career-role {
+  font-size: 1rem;
+  color: var(--primary-cyan);
+  margin-bottom: 0.25rem;
+}
+
+.career-meta .career-company {
+  font-size: 0.9rem;
+  color: var(--primary-green);
+  margin-bottom: 0.15rem;
+}
+
+.career-meta .career-date {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+}
+
+.projects-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.project-block {
+  padding: 0.5rem 0;
+}
+
+.project-name {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.95rem;
+  color: var(--primary-green);
+  letter-spacing: 1px;
+  margin-bottom: 0.5rem;
+}
+
+.project-desc {
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: var(--primary-cyan);
+  opacity: 0.9;
+  margin-bottom: 0.75rem;
+}
+
+.project-bullets {
+  list-style: none;
+  padding-left: 0;
+}
+
+.project-bullets li {
+  font-size: 0.85rem;
+  color: var(--primary-cyan);
+  padding-left: 1.25rem;
+  position: relative;
+  margin-bottom: 0.4rem;
+  line-height: 1.5;
+}
+
+.project-bullets li::before {
+  content: '▹';
+  position: absolute;
+  left: 0;
+  color: var(--primary-green);
+}
+
+.project-bullets .bullet-highlight {
+  color: var(--primary-green);
+  font-weight: 500;
+}
+
+.project-bullets .bullet-link {
+  color: var(--primary-green);
+  text-decoration: underline;
+  margin-left: 0.15em;
+}
+
+.project-bullets .bullet-link:hover {
+  opacity: 0.9;
+  text-decoration: none;
+}
